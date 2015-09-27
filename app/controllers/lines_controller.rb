@@ -1,18 +1,16 @@
 class LinesController < ApplicationController
 
   def show
-    # @line = Line.find(params[:id])
 
-    # if @line.present
-    #   render json: @line.line_text, status: :ok
-    # else
-    #   render nothing: :true, status: :bad_request
-    # end
     begin
       @line = Line.find(params[:id])
       render json: @line.line_text, status: :ok
-    rescue
-      render nothing: :true, status: 413
+    rescue StandardError => error
+      if params[:id].to_i > Line.all.count
+        render nothing: :true, status: 413
+      else
+        render json: error.message, status: 500
+      end
     end
 
   end
