@@ -12,7 +12,7 @@ class LinesController < ApplicationController
       @line = Line.find(params[:id])
       render json: @line.line_text, status: :ok
     rescue
-      render nothing: :true, status: :bad_request
+      render nothing: :true, status: 413
     end
 
   end
