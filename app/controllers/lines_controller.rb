@@ -3,10 +3,13 @@ class LinesController < ApplicationController
   def show
 
     begin
-      @line = Line.find(params[:id])
-      render json: @line.line_text, status: :ok
+      requested_line = params[:id]
+
+      Line.check_if_exceeds_line_count?(requested_line)
+      @line = Line.find_from_redis(requested_line)
+      render json: @line, status: :ok
     rescue StandardError => error
-      status = (params[:id].to_i > Line.all.count ? 413 : 500)
+      status = (Line.exceeds_line_count?(requested_line) ? 413 : 500)
       render json: error.message, status: status
     end
 
