@@ -6,11 +6,8 @@ class LinesController < ApplicationController
       @line = Line.find(params[:id])
       render json: @line.line_text, status: :ok
     rescue StandardError => error
-      if params[:id].to_i > Line.all.count
-        render nothing: :true, status: 413
-      else
-        render json: error.message, status: 500
-      end
+      status = (params[:id].to_i > Line.all.count ? 413 : 500)
+      render json: error.message, status: status
     end
 
   end
