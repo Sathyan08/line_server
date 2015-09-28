@@ -4,12 +4,13 @@ class LinesController < ApplicationController
 
     begin
       requested_line = params[:id]
-      Line::ApiRequestValidator.call(requested_line)
-
       @line = Line.find_by_redis(requested_line)
+
+      Line::ApiRequestValidator.call(requested_line) if @line.nil?
+
       render json: @line, status: :ok
     rescue StandardError => error
-      status = Line::ApiStatusCode.call(requested_line)
+      status = Line::ApiStatusCode.call(requested_line) if @line.nil?
       render json: error.message, status: status
     end
 
