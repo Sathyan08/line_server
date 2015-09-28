@@ -1,3 +1,30 @@
+About
+
+This application establishes a simple API that returns lines from a text file.  Although the two sample files are small, I designed this system to scale well for both the size of the file and the number of users submitting get requests to retrieve information from the API.
+
+I was asked to build a server that would respond to HTTP GET requests such that a request formatted as "/lines/:id" would return a line number equal to the id number in the request.
+
+Technologies Used
+
+This application uses Rails 4.2, a Postgres SQL database, and a Redis server for caching.
+
+I used Rails 4.2 because I am familiar with it, and I was able to produce this project in about 2 despite the fact that I had not used Redis in any of my projects before.  I wanted to finish this project in a timely manner, so I stuck with the framework that I was most familiar with.
+
+I decided to use Redis for caching in order to improve the performance of this application.  The tech community seems to agree that Redis performs quickly and is excellent at allowing users to utilize a variety of data structures.  I decided to represent the different lines of the text file as elements of an array, and I was able to use this data structure easily using Redis.  Morever, I decided that I wanted to use Redis because I could change the data structure that I used to respond to queries if I needed to respond to other types of requests for information or analyze the data in another way.  Redis would be the most flexible if I wanted to expand the scope of the project.
+
+I decided to include a Postgres Sql database as well.  Redis should be able to store most text files in memory, but I would have problems with truly enormous files because Redis relies on volatile memory, which is expensive.  Past a certain point, the file would no longer fit into a single Redis instance, and it might be better to store the data in a standard database.  Moreover, I used Postgres to further validate the data extracted from the file.  I also believe that it may be useful to keep the Postgres database in case I chose to add a schema to this project later.  For example, I could keep track of which file each line of text came from if I chose to extract lines from multiple text files in a future version of this application.
+
+How to run this system.
+
+To use this application, you should first clone a copy of this repository from GitHub.
+
+After that, you may want to add a text file to the application so that you can retrieve lines of text using this application.
+
+Questions.
+
+1.  How does this system work.
+
+
 == README
 
 This README would normally document whatever steps are necessary to get the
