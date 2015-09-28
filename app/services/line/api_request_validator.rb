@@ -15,7 +15,7 @@ class Line
 
     def self.check_if_exceeds_line_count?(requested_line)
       if self.exceeds_line_count?(requested_line)
-        message = "You requested line #{ requested_line }, but the max line count is only #{ Line.line_count_from_redis }"
+        message = "You requested line #{ requested_line }, but the max line count is only #{ Line.count_from_redis }"
         raise StandardError.new(message)
       end
     end
