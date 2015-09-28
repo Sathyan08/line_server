@@ -14,6 +14,12 @@ gem 'redis'
 
 gem 'redis-namespace'
 
+group :test do
+  gem "rspec"
+  gem "fakeredis", :require => "fakeredis/rspec"
+  gem 'factory_girl_rails'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
