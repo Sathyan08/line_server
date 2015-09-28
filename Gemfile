@@ -15,7 +15,7 @@ gem 'redis'
 gem 'redis-namespace'
 
 group :test do
-  gem "rspec"
+  gem 'rspec-rails', '~> 3.0'
   gem "fakeredis", :require => "fakeredis/rspec"
   gem 'factory_girl_rails'
 end
