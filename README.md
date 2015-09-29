@@ -6,7 +6,7 @@ This application establishes a simple API that returns lines from a text file.  
 I was asked to build a server that would respond to HTTP GET requests such that a request formatted as "/lines/:id" would return a line number equal to the id number in the request.
 
 
-# How to run this system.
+### How to run this system.
 
 To use this application, you should first clone a copy of this repository from GitHub.
 
@@ -21,9 +21,9 @@ If you do not have redis installed, you should install it before running this ap
 ```
 brew install redis
 ```
-If you do not have Homebrew installed, you can follow the instructions to install Redis on Mac OS X found at: ([ jasdeep.ca/2012/05/installing-redis-on-mac-os-x ]).
+If you do not have Homebrew installed, you can follow the instructions to install Redis on Mac OS X found at: [I'm an inline-style link]( jasdeep.ca/2012/05/installing-redis-on-mac-os-x ).
 
-You should also install PostgresSQL if you do not have it.  You can find instructions on how to install PostgresSQL on Mac OS X at ([ www.codefellows.org/blog/three-battle-tested-ways-to-install-postgresql ])
+You should also install PostgresSQL if you do not have it.  You can find instructions on how to install PostgresSQL on Mac OS X at [I'm an inline-style link]( www.codefellows.org/blog/three-battle-tested-ways-to-install-postgresql )
 
 Next, navigate to the root directory and input:
 
@@ -33,13 +33,14 @@ bash run.sh FILE_NAME
 
 The FILE_NAME should be the exact name of the text file that you want to use, including the extension at the end.  For example, you could input `bash run.sh sample_file.txt` to use the sample file that I included with this repository.
 
-##### Questions.
+# Questions.
+-------------
 
-## 1.  How does this system work?
+### 1.  How does this system work?
 
 This system preprocesses the text file using ruby scripts and saves the each line's line number and text to a PostgresSQL database.  After that, it caches each line into a Redis key-value store.  It uses Rails 4.2's API functionality to return line numbers in response to GET requests.  The application will retrieve these lines of text from the Redis cache rather than the database.
 
-## 2. How will your system perform with a 1 GB file? a 10 GB file? a 100 GB file?
+### 2. How will your system perform with a 1 GB file? a 10 GB file? a 100 GB file?
 
 The application should do well with the 1 GB file and the 10 GB file, provided that the Redis server has access to adequate RAM.  Anyone running this application could use a server that has more than enough memory to store the entire file in the cache while leaving enough RAM to run other functions that the server needs as well as run the rest of the application code.
 
@@ -47,21 +48,21 @@ The application, in its current state, may not be able to handle a 100 GB file b
 
 At that point, anyone running this application would probably need to spread the data of the file across multiple Redis servers.  Someone would need to modify the controller to identify which Redis instance that it should try to retrieve the data from.
 
-## 3. How will your system perform with 100 users? 10,000 users? 1,000,000 users?
+### 3. How will your system perform with 100 users? 10,000 users? 1,000,000 users?
 
 This application should scale well as the number of users increases.  It can retrieve data for the users quickly because it stores the data as a hash stored in volatile memory, which means that it should be able to respond to user responses quickly.  If necessary, anyone using this application could probably scale this application horizontally by adding more servers to process requests and make requests for information from the Redis server.
 
-## 4. What documentation, websites, papers, etc did you consult in doing this assignment?
+### 4. What documentation, websites, papers, etc did you consult in doing this assignment?
 
 I researched Stack Overflow to learn more about Redis and Memcached, which were the two technologies that I initially considered when I first started working on this project.  I also used Stack Overflow to learn how to specify the status to send when rendering json in a Rails API.
 
-I consulted Brewhouse.io on how to use service objects to keep models thin in Rails apps.  ([ brewhouse.io/blog/2014/04/30/gourmet-service-objects.html ])
+I consulted Brewhouse.io on how to use service objects to keep models thin in Rails apps.  [I'm an inline-style link]( brewhouse.io/blog/2014/04/30/gourmet-service-objects.html )
 
-I used Site Point to learn how to incorporate Redis into a Rails application.  You can find the specific article that I referenced at ([ www.sitepoint.com/introduction-to-using-redis-with-rails ]).
+I used Site Point to learn how to incorporate Redis into a Rails application.  You can find the specific article that I referenced at [I'm an inline-style link]( www.sitepoint.com/introduction-to-using-redis-with-rails ).
 
-I watched the Railscast episode on Memcached to review how to incorporate Memcached into a Rails app, even though I ultimately decided to use Redis for this project.  ([ railscasts.com/episodes/380-memcached-dalli ])
+I watched the Railscast episode on Memcached to review how to incorporate Memcached into a Rails app, even though I ultimately decided to use Redis for this project.  [I'm an inline-style link]( railscasts.com/episodes/380-memcached-dalli )
 
-## 5. What third-party libraries or other tools does the system user?  How did you choose each library or framework that you used?
+### 5. What third-party libraries or other tools does the system user?  How did you choose each library or framework that you used?
 
 This application uses Rails 4.2, a Postgres SQL database, and a Redis server for caching.
 
@@ -71,7 +72,7 @@ I decided to use Redis for caching in order to improve the performance of this a
 
 I decided to include a Postgres Sql database as well.  Redis should be able to store most text files in memory, but I would have problems with truly enormous files because Redis relies on volatile memory, which is expensive.  Past a certain point, the file would no longer fit into a single Redis instance, and it might be better to store the data in a standard database.  Moreover, I used Postgres to further validate the data extracted from the file.  I also believe that it may be useful to keep the Postgres database in case I chose to add a schema to this project later.  For example, I could keep track of which file each line of text came from if I chose to extract lines from multiple text files in a future version of this application.
 
-## 6. How long did you spend on this exercise? If you had unlimited more time to spend on this, how would you spend it and how would you prioritize each item?
+### 6. How long did you spend on this exercise? If you had unlimited more time to spend on this, how would you spend it and how would you prioritize each item?
 
 I spent about 2.5 hours on this project between coding and research.  If I had unlimited time, I would focus on the following:
 
@@ -93,7 +94,7 @@ I spent about 2.5 hours on this project between coding and research.  If I had u
 
   I would do B last.  I would only need to develop the ORM to expand on the features of the application because the system that I have right now does an adequate job of handling current requirements of the app.  Moreover, I would need to spend a lot of time developing a robust and intuitive ORM.  I would possibly spend a lot of time on this aspect of the project for no reason, which is why I would do that last.
 
-  ## 7.  If you were to critique your code, what would you have to say about it?
+  ### 7.  If you were to critique your code, what would you have to say about it?
 
   As mentioned in my previous answer (no. 6), I feel that I missed some opportunities to design better, more intuitive objects with consistent interfaces.  Moreover, I could have extracted more logic into objects in order to make my code more modular and reuseable.
 
