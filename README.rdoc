@@ -1,4 +1,4 @@
-##### About
+<h2> About </h2>
 
 This application establishes a simple API that returns lines from a text file.  Although the two sample files are small, I designed this system to scale well for both the size of the file and the number of users submitting get requests to retrieve information from the API.
 
@@ -9,10 +9,9 @@ I was asked to build a server that would respond to HTTP GET requests such that 
 
 To use this application, you should first clone a copy of this repository from GitHub.
 
-```
-git init
-git clone https://github.com/Sathyan08/line_server
-```
+    git init
+    git clone https://github.com/Sathyan08/line_server
+
 
 After that, you may want to add a text file to the application so that you can retrieve lines of text using this application.  You can add the text file to the /db/data folder.
 
@@ -81,14 +80,20 @@ I spent about 2.5 hours on this project between coding and research.  If I had u
 
   - C.  I would create rake tasks and jobs to help maintain the application.  For example, I would create a task to clear the Redis store in case I wanted to change what data to include in it.
 
-  - D.  I would refactor the service objects to have a more easily understandable interface.  Right now, the service objects are namespaced within the "Line" class, but they accept "requests" which are actually only id numbers.  I should have created an interface / design where the class that placed the service object within is parameter that I enter into the .call method.  For example, I should have handled exceptions in a service object called `Param::IdentifyError.call(params)` and I should have called the status code service object `Param::IdentifyResponseStatus.call(params)`.
+  - D.  I would refactor the service objects to have a more easily understandable interface.  Right now, the service objects are namespaced within the "Line" class, but they accept "requests" which are actually only id numbers.  I should have created an interface / design where the class that placed the service object within is parameter that I enter into the .call method.  For example, I should have handled exceptions in a service object called `Param::IdentifyError.call(params)` and I should have called the status code service object `Param::IdentifyResponseStatus.call(params)`.  This way, developers who work on this project can intuitively know how to use the service objects without looking them up to see each object's interface.
 
-  - E.
+  - E.  I would extract more of the logic used in the ruby scripts that I used to load and cache the data into service objects.  This way, I could use those objects in other contexts.  For example, I could use create multiple Redis stores, each one representing a different file.  If I used objects to generate redis stores, I could create a job that processes files asynchronously after users uploaded them.
 
   I would start with A and stop using the global variable if possible.  I want to make sure my system is robust before moving onto other tasks.
 
   Next, I would do C because developing these tools will ultimately make it easier and less time consuming to maintain and modify the system, which will ultimately save time in the long run.
 
-  I would do B last.  I would only need to develop the ORM to expand on the features of the application because the system that I have right now does an adequate
+  I would then refactor the code to create more consistent interfaces and extract more logic into the service objects.  This will allow me to expand on the application's functionality more easily because I will find it easier
 
-  - D. I would refactor the code to extract the logic used in the ruby scripts that I used to
+  I would do B last.  I would only need to develop the ORM to expand on the features of the application because the system that I have right now does an adequate job of handling current requirements of the app.  Moreover, I would need to spend a lot of time developing a robust and intuitive ORM.  I would possibly spend a lot of time on this aspect of the project for no reason, which is why I would do that last.
+
+  ## 7.  If you were to critique your code, what would you have to say about it?
+
+  As mentioned in my previous answer (no. 6), I feel that I missed some opportunities to design better, more intuitive objects with consistent interfaces.  Moreover, I could have extracted more logic into objects in order to make my code more modular and reuseable.
+
+  I also feel that the show action on the LineController is still a little too busy, and I wish I could extract more logic into the objects.  I include two boolean checks to see when to generate custom exceptions or custom status codes.  I did this for performance reasons because I did not want to devote resources to create additional objects when it was not necessary.  Nonetheless, I feel like including these boolean checks on the controller may create problems down the road because it feels like each object should contain all of its own logic.  In this case, it feels wrong to have some of the logic regarding exceptions and status codes on the controller and some of that logic in the service objects.
