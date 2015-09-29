@@ -16,4 +16,9 @@ RSpec.describe Line, type: :model do
     expect(second_line.save).to be false
   end
 
+  it "Can save blank lines." do
+    line.line_text = ""
+    expect(line.save).to be true
+  end
+
 end
