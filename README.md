@@ -21,9 +21,9 @@ If you do not have redis installed, you should install it before running this ap
 ```
 brew install redis
 ```
-If you do not have Homebrew installed, you can follow the instructions to install Redis on Mac OS X found at: [I'm an inline-style link]( jasdeep.ca/2012/05/installing-redis-on-mac-os-x ).
+If you do not have Homebrew installed, you can follow the instructions to install Redis on Mac OS X found at: [Install Redis]( jasdeep.ca/2012/05/installing-redis-on-mac-os-x ).
 
-You should also install PostgresSQL if you do not have it.  You can find instructions on how to install PostgresSQL on Mac OS X at [I'm an inline-style link]( www.codefellows.org/blog/three-battle-tested-ways-to-install-postgresql )
+You should also install PostgresSQL if you do not have it.  You can find instructions on how to install PostgresSQL on Mac OS X at [Code Fellows]( www.codefellows.org/blog/three-battle-tested-ways-to-install-postgresql )
 
 Next, navigate to the root directory and input:
 
@@ -56,11 +56,11 @@ This application should scale well as the number of users increases.  It can ret
 
 I researched Stack Overflow to learn more about Redis and Memcached, which were the two technologies that I initially considered when I first started working on this project.  I also used Stack Overflow to learn how to specify the status to send when rendering json in a Rails API.
 
-I consulted Brewhouse.io on how to use service objects to keep models thin in Rails apps.  [I'm an inline-style link]( brewhouse.io/blog/2014/04/30/gourmet-service-objects.html )
+I consulted Brewhouse.io on how to use service objects to keep models thin in Rails apps.  [Brewhouse]( brewhouse.io/blog/2014/04/30/gourmet-service-objects.html )
 
-I used Site Point to learn how to incorporate Redis into a Rails application.  You can find the specific article that I referenced at [I'm an inline-style link]( www.sitepoint.com/introduction-to-using-redis-with-rails ).
+I used Site Point to learn how to incorporate Redis into a Rails application.  You can find the specific article that I referenced at [Sitepoint]( www.sitepoint.com/introduction-to-using-redis-with-rails ).
 
-I watched the Railscast episode on Memcached to review how to incorporate Memcached into a Rails app, even though I ultimately decided to use Redis for this project.  [I'm an inline-style link]( railscasts.com/episodes/380-memcached-dalli )
+I watched the Railscast episode on Memcached to review how to incorporate Memcached into a Rails app, even though I ultimately decided to use Redis for this project.  [Railscasts]( railscasts.com/episodes/380-memcached-dalli )
 
 ### 5. What third-party libraries or other tools does the system user?  How did you choose each library or framework that you used?
 
