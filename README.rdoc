@@ -1,4 +1,4 @@
-<h2> About </h2>
+# About
 
 This application establishes a simple API that returns lines from a text file.  Although the two sample files are small, I designed this system to scale well for both the size of the file and the number of users submitting get requests to retrieve information from the API.
 
