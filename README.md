@@ -10,7 +10,6 @@ I was asked to build a server that would respond to HTTP GET requests such that 
 
 To use this application, you should first clone a copy of this repository from GitHub.
 
-    git init
     git clone https://github.com/Sathyan08/line_server
 
 
