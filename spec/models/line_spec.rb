@@ -12,7 +12,9 @@ RSpec.describe Line, type: :model do
   end
 
   it "Cannot save if it has the same line number as another line." do
-    second_line = line.dup
+    second_line = Line.new
+    second_line.line_number = line.line_number
+    second_line.line_text = "test"
     expect(second_line.save).to be false
   end
 
